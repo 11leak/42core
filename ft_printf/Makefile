@@ -5,31 +5,31 @@
 #                                                     +:+ +:+         +:+      #
 #    By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/06/05 13:40:35 by dwotsche          #+#    #+#              #
-#    Updated: 2025/06/30 13:53:22 by dwotsche         ###   ########.fr        #
+#    Created: 2025/06/30 13:50:13 by dwotsche          #+#    #+#              #
+#    Updated: 2025/07/03 11:13:08 by dwotsche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRCS = $(wildcard *.c)
+SRCS =
 OBJS = $(SRCS:.c=.o)
-NAME = libft.a
+NAME = libftprintf.a
 all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $(NAME) $(OBJS)
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o: %.cc
+	$(CC) $(CFLAGS) -c $< -o
 clean:
 	rm -f $(OBJS)
-fclean: clean
+fclean:
 	rm -f $(NAME)
-re: fclean all
+re : fclean all
 
 MAIN = main
 MAIN_SRC = main.c
 $(MAIN): $(MAIN_SRC) $(NAME)
-	@echo "Compiling main test program $@"
+	@echo "Compiling main test program... $@"
 	$(CC) $(CFLAGS) $(MAIN_SRC) -L. -lft -o $(MAIN)
 run: $(MAIN)
 	./$(MAIN)
