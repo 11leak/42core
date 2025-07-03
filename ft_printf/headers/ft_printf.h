@@ -6,7 +6,13 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 13:50:04 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/06/30 13:53:22 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:32:15 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
+int	ft_printf(const char *s, ...);
+
+#endif
