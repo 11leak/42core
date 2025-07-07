@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:21:07 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/07 14:22:02 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/07 16:09:26 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,23 @@ int	ft_print_value(char c, va_list args)
 
 	len = 0;
 	if (c == 'c')
-		len = ft_putchar_fd(va_arg(args, char), 1);
+		len = ft_putchar_fd(va_arg(args, int), 1);
 	if (c == 's')
 		len = ft_putstr_fd(va_arg(args, char*), 1);
-	if (c == 'p')
+	// if (c == 'p')
 		// void * pointer - (hexadecimal format)
-	if (c == 'd')
-		p
-	if (c == 'i')
-		// integer
-	if (c == 'u')
-		// unsigned decimal
-	if (c == 'x')
-		// hexadecimal (base 16) lowercase
-	if (c == 'X')
-		// hexadecimal (base 16) uppercase
-	if (c == '%')
-		// percent sign
+	// if (c == 'd')
+		// p
+	// if (c == 'i')
+	// 	// integer
+	// if (c == 'u')
+	// 	// unsigned decimal
+	// if (c == 'x')
+	// 	// hexadecimal (base 16) lowercase
+	// if (c == 'X')
+	// 	// hexadecimal (base 16) uppercase
+	// if (c == '%')
+	// 	// percent sign
 	return (len);
 }
 
