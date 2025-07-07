@@ -6,23 +6,26 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:21:07 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/03 12:06:15 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/07 14:22:02 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-void	ft_print_value(char c)
+int	ft_print_value(char c, va_list args)
 {
+	int	len;
+
+	len = 0;
 	if (c == 'c')
-		// char
+		len = ft_putchar_fd(va_arg(args, char), 1);
 	if (c == 's')
-		// string
+		len = ft_putstr_fd(va_arg(args, char*), 1);
 	if (c == 'p')
 		// void * pointer - (hexadecimal format)
 	if (c == 'd')
-		// decimal
+		p
 	if (c == 'i')
 		// integer
 	if (c == 'u')
@@ -33,22 +36,29 @@ void	ft_print_value(char c)
 		// hexadecimal (base 16) uppercase
 	if (c == '%')
 		// percent sign
+	return (len);
 }
 
 int	ft_printf(const char* s, ...)
 {
-	int	i;
+	int		i;
+	int		len_s;
+	va_list	args;
+
+	i = 0;
+	len_s = 0;
+	va_start(args, s);
 	while (s[i])
 	{
 		if (s[i] == '%')
 		{
-			ft_print_value(s[i + 1]);
+			len_s += ft_print_value(s[i + 1], args);
+			i++;
 		}
 		else
-		{
 			ft_putchar_fd(s[i], 1);
-		}
 		i++;
 	}
-
+	va_end(args);
+	return (len_s);
 }
