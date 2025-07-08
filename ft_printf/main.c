@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/30 13:50:04 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/08 16:12:45 by dwotsche         ###   ########.fr       */
+/*   Created: 2025/07/08 16:22:19 by dwotsche          #+#    #+#             */
+/*   Updated: 2025/07/08 16:23:53 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+// #include "libft/libft.h"
+#include "ft_printf.h"
 
-# include "libft/libft.h"
-# include <unistd.h>
-# include <stdarg.h>
-
-int	ft_printf(const char *s, ...);
-int	ft_print_value(char c, va_list args);
-
-#endif
+int	main()
+{
+	ft_printf("hallo %c", 'c');
+}

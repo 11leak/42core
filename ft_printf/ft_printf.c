@@ -6,12 +6,12 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:21:07 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/07 16:09:26 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/08 16:13:32 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft.h"
+#include "libft/libft.h"
 
 int	ft_print_value(char c, va_list args)
 {
