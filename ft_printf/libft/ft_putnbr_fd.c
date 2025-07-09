@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:39:25 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/06/18 16:44:17 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/09 11:10:47 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,5 @@ void	ft_putnbr_fd(int n, int fd)
 		return ;
 	}
 	ft_extension_putnbr_fd(n, str, i, fd);
+	
 }
