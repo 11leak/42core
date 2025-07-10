@@ -5,39 +5,32 @@
 #                                                     +:+ +:+         +:+      #
 #    By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/06/30 13:50:13 by dwotsche          #+#    #+#              #
-#    Updated: 2025/07/10 14:23:20 by dwotsche         ###   ########.fr        #
+#    Created: 2025/07/09 13:25:43 by dwotsche          #+#    #+#              #
+#    Updated: 2025/07/09 13:25:44 by dwotsche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = cc
-#CFLAGS = -Wall -Wextra -Werror
-SRCS =	ft_printf.c ft_printf_utils.c
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
+SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
-NAME = libftprintf.a
-LIBFT = libft
-LIBFT_A = $(LIBFT)/libft.a
-LIBFT_MAKE = make -C $(LIBFT)
+NAME = libft.a
 all: $(NAME)
-$(NAME): $(OBJS) $(LIBFT)/libft.a
-	cp $(LIBFT)/libft.a $(NAME)
-	ar rc $(NAME) $(OBJS)
-$(LIBFT)/libft.a:
-	@echo "Baue libft..."
-	$(MAKE) -C $(LIBFT) || { echo "Fehler …"; exit 1; }
+$(NAME): $(OBJS)
+	ar rcs $(NAME) $(OBJS)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	rm -f $(OBJS)
 fclean: clean
 	rm -f $(NAME)
-re : fclean all
+re: fclean all
 
 MAIN = main
 MAIN_SRC = main.c
 $(MAIN): $(MAIN_SRC) $(NAME)
-	@echo "Compiling main test program... $@"
-	$(CC) $(CFLAGS) $(MAIN_SRC) -L. -lftprintf -o $(MAIN)
+	@echo "Compiling main test program $@"
+	$(CC) $(CFLAGS) $(MAIN_SRC) -L. -lft -o $(MAIN)
 run: $(MAIN)
 	./$(MAIN)
 .PHONY: all clean fclean re

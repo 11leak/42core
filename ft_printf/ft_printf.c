@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:21:07 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/09 11:29:14 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/10 14:07:32 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,21 @@ int	ft_print_value(char c, va_list args)
 	len = 0;
 	if (c == 'c')
 		len = ft_putchar_fd(va_arg(args, int), 1);
-	if (c == 's')
-		len = ft_putstr_fd(va_arg(args, char*), 1);
-	if (c == 'p')
+	else if (c == 's')
+		len = ft_putstr_fd(va_arg(args, char *), 1);
+	// else if (c == 'p')
 		// void * pointer - (hexadecimal format)
-	if (c == 'd')
-		len = ft_putnbr_id(va_arg(args, int), 1);
-	if (c == 'i')
-		len = ft_putnbr_id(va_arg(args, int), 1);
-	if (c == 'u')
-		// unsigned decimal
-		len = 
-	// if (c == 'x')
+	else if (c == 'd')
+		len = ft_putnbr_id(va_arg(args, int));
+	else if (c == 'i')
+		len = ft_putnbr_id(va_arg(args, int));
+	else if (c == 'u')
+		len = ft_putnbr_u(va_arg(args, unsigned int));
+	// else if (c == 'x')
 	// 	// hexadecimal (base 16) lowercase
-	// if (c == 'X')
+	// else if (c == 'X')
 	// 	// hexadecimal (base 16) uppercase
-	if (c == '%')
+	else if (c == '%')
 		len = ft_putchar_fd('%', 1);
 	return (len);
 }
@@ -57,7 +56,10 @@ int	ft_printf(const char* s, ...)
 			i++;
 		}
 		else
+		{
 			ft_putchar_fd(s[i], 1);
+			len_s++;
+		}
 		i++;
 	}
 	va_end(args);
