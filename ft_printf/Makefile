@@ -6,12 +6,12 @@
 #    By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 13:50:13 by dwotsche          #+#    #+#              #
-#    Updated: 2025/07/10 14:23:20 by dwotsche         ###   ########.fr        #
+#    Updated: 2025/07/10 17:23:37 by dwotsche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-#CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 SRCS =	ft_printf.c ft_printf_utils.c
 OBJS = $(SRCS:.c=.o)
 NAME = libftprintf.a
