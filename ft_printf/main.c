@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/08 16:22:19 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/12 01:41:27 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/12 01:55:15 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main()
 	// ft_printf("%d\n", ft_printf("%x\n", 2000));
 	// printf("%d\n", printf("%x\n", 2000));
 	// char *str = "test";
-	// ft_printf("%p\n", 0);
-	printf(" %p %p ", 0, 0);
+	ft_printf("%d\n", ft_printf(" %p %p\n", 0, 0));
+	printf("%d\n", printf(" %p %p\n", 0, 0));
 }
 
