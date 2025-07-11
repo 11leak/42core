@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:57:19 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/08 13:40:51 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/11 14:28:30 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,8 @@ int		ft_putchar_fd(char c, int fd);
 int		ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+int		ft_puthex_fdx(unsigned int nb);
+int		ft_puthex_fdxx(unsigned int nb);
 
 #endif

@@ -6,11 +6,11 @@
 #    By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/09 13:25:43 by dwotsche          #+#    #+#              #
-#    Updated: 2025/07/09 13:25:44 by dwotsche         ###   ########.fr        #
+#    Updated: 2025/07/11 12:48:31 by dwotsche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror
 SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
