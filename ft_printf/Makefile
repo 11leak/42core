@@ -6,7 +6,7 @@
 #    By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 13:50:13 by dwotsche          #+#    #+#              #
-#    Updated: 2025/07/11 11:54:41 by dwotsche         ###   ########.fr        #
+#    Updated: 2025/07/12 01:34:36 by dwotsche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,8 +29,10 @@ $(LIBFT)/libft.a:
 	$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	rm -f $(OBJS)
+	$(MAKE) -C $(LIBFT) clean
 fclean: clean
 	rm -f $(NAME)
+	$(MAKE) -C $(LIBFT) fclean
 re : fclean all
 
 MAIN = main

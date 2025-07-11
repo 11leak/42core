@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 11:12:08 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/11 12:03:17 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/12 01:31:43 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_putnbr_u(unsigned int nb)
 {
 	int		i;
 	char	str[11];
-	int	ret;
+	int		ret;
 
 	i = 0;
 	if (nb == 0)
@@ -43,7 +43,7 @@ int	ft_putnbr_u(unsigned int nb)
 int	ft_putnbr_id(int nbr)
 {
 	int		len_nbr;
-	char*	s;
+	char	*s;
 
 	len_nbr = 0;
 	s = ft_itoa(nbr);
@@ -54,4 +54,17 @@ int	ft_putnbr_id(int nbr)
 	}
 	free (s);
 	return (len_nbr);
+}
+
+int	ft_putptr(void *ptr)
+{
+	int			len;
+	uintptr_t	address;
+
+	address = (uintptr_t)ptr;
+	write(1, "0x", 2);
+	if (!address)
+		return (write(1, "0", 1) + 2);
+	len = ft_puthex_uintptr(address);
+	return (len + 2);
 }

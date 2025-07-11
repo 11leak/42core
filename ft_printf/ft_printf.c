@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/03 11:21:07 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/11 14:28:14 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/12 01:32:08 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int	ft_print_value(char c, va_list args)
 		len = ft_putchar_fd(va_arg(args, int), 1);
 	else if (c == 's')
 		len = ft_putstr_fd(va_arg(args, char *), 1);
-	// else if (c == 'p')
-		// void * pointer - (hexadecimal format)
+	else if (c == 'p')
+		len = ft_putptr(va_arg(args, void *));
 	else if (c == 'd')
 		len = ft_putnbr_id(va_arg(args, int));
 	else if (c == 'i')
@@ -39,7 +39,7 @@ int	ft_print_value(char c, va_list args)
 	return (len);
 }
 
-int	ft_printf(const char* s, ...)
+int	ft_printf(const char *s, ...)
 {
 	int		i;
 	int		len_s;

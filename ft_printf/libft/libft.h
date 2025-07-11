@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:57:19 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/11 14:28:30 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/12 01:20:12 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void	ft_putnbr_fd(int n, int fd);
 
 int		ft_puthex_fdx(unsigned int nb);
 int		ft_puthex_fdxx(unsigned int nb);
+int		ft_puthex_uintptr(uintptr_t nb);
 
 #endif
