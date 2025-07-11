@@ -6,7 +6,7 @@
 #    By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/30 13:50:13 by dwotsche          #+#    #+#              #
-#    Updated: 2025/07/12 01:37:27 by dwotsche         ###   ########.fr        #
+#    Updated: 2025/07/12 01:42:59 by dwotsche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ $(NAME): $(OBJS) $(LIBFT)/libft.a
 	cp $(LIBFT)/libft.a $(NAME)
 	ar rc $(NAME) $(OBJS)
 $(LIBFT)/libft.a:
-	@echo "Baue libft..."
+	@echo "build libft..."
 	$(MAKE) -C $(LIBFT) || { echo "Fehler …"; exit 1; }
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@

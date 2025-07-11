@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 11:12:08 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/12 01:31:43 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/12 01:45:27 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ int	ft_putptr(void *ptr)
 
 	address = (uintptr_t)ptr;
 	write(1, "0x", 2);
-	if (!address)
+	if (ptr == NULL)
 		return (write(1, "0", 1) + 2);
-	len = ft_puthex_uintptr(address);
+	else
+		len = ft_puthex_uintptr(address);
 	return (len + 2);
 }
