@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/18 12:31:18 by dwotsche         ###   ########.fr       */
+/*   Created: 2025/07/17 13:33:32 by dwotsche          #+#    #+#             */
+/*   Updated: 2025/07/17 14:13:49 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-char	*get_next_line(int fd)
-{
-	static char	buffer[BUFFER_SIZE + 1];
-	int	read_bytes;
+# define BUFFER_SIZE 42
 
-	while (read_bytes = read(fd, buffer, BUFFER_SIZE) > 0)
-	{
-		
-	}
-}
+# include <unistd.h>
+
+char	*get_next_line(int fd);
+
+#endif
