@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:33:35 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/18 13:29:35 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/25 16:49:42 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,17 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		dst[i] = '\0';
 	}
 	return (ft_strlen(src));
+}
+
+char	*ft_strdup(const char *s)
+{
+	char	*ptr;
+	size_t	len_s;
+
+	len_s = ft_strlen(s);
+	ptr = (char *)malloc(sizeof(char) * len_s + 1);
+	if (!ptr)
+		return (NULL);
+	ft_strlcpy(ptr, s, len_s + 1);
+	return (ptr);
 }
