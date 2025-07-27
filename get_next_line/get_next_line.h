@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:33:32 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/25 16:49:59 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/26 14:26:45 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@
 # define BUFFER_SIZE 42
 
 # include <unistd.h>
+# include <stdio.h>
+# include <fcntl.h>
+# include <stdlib.h>
 
 char	*get_next_line(int fd);
 

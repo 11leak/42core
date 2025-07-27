@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/25 20:58:11 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/26 14:28:13 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*get_next_line(int fd)
 	char		buffer[BUFFER_SIZE + 1];
 	static char	*rest;
 	char		*line;
-	char*		found_nl;
+	int			found_nl;
 	int			read_bytes;
 
 	while ((read_bytes = read(fd, buffer, BUFFER_SIZE)) > 0)
