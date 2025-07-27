@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:33:35 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/25 16:49:42 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:27:18 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ size_t	ft_strlen(const char *str)
 	return (i++);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_strchr(const char *s, int c)
 {
 	int	i;
 
@@ -50,10 +50,10 @@ char	*ft_strchr(const char *s, int c)
 	while (i <= (int)ft_strlen(s))
 	{
 		if (s[i] == (char)c)
-			return ((char *)&s[i]);
+			return (i);
 		i++;
 	}
-	return (NULL);
+	return (-1);
 }
 
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)

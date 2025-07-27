@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/26 14:28:13 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:28:58 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,16 +51,18 @@ char	*get_next_line(int fd)
 	int			found_nl;
 	int			read_bytes;
 
+	line = NULL;
 	while ((read_bytes = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[read_bytes] = '\0';
 		if (!rest)
 			rest = ft_strdup(buffer);
 		ft_strlcat(rest, buffer, ft_strlen(buffer));
-		if ((found_nl = ft_strchr(rest, '\n')) != NULL)
+		if ((found_nl = ft_strchr(rest, 10)) != -1)
 		{
 			ft_strlcpy(line, rest, found_nl);
 			return(line);
 		}
 	}
+	return (NULL);
 }

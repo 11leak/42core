@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 20:58:27 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/26 14:26:31 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:26:41 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 
 int	main(int argc, char **argv)
 {
+	int	fd;
 	if (argc != 2)
 		return (1);
-	int	fd = open(argv[1], O_RDONLY);
-	printf("%s", get_next_line(argv[1]));
+	fd = open(argv[1], O_RDONLY);
+	printf("%s", get_next_line(fd));
 	return (0);
 }
