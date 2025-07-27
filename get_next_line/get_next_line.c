@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/27 14:48:59 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:51:18 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ char	*get_next_line(int fd)
 	int			read_bytes;
 
 	line = NULL;
-	while ((read_bytes = read(fd, buffer, BUFFER_SIZE)) > 0)
+	read_bytes = read(fd, buffer, BUFFER_SIZE);
+	while (read_bytes > 0)
 	{
 		buffer[read_bytes] = '\0';
 		if (!rest)
@@ -63,6 +64,7 @@ char	*get_next_line(int fd)
 			ft_strlcpy(line, rest, found_nl);
 			return (line);
 		}
+		read_bytes = read(fd, buffer, BUFFER_SIZE);
 	}
 	return (NULL);
 }
