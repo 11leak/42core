@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/27 14:28:58 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:48:59 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	*get_next_line(int fd)
 		if ((found_nl = ft_strchr(rest, 10)) != -1)
 		{
 			ft_strlcpy(line, rest, found_nl);
-			return(line);
+			return (line);
 		}
 	}
 	return (NULL);
