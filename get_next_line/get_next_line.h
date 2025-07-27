@@ -6,14 +6,12 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:33:32 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/27 14:23:43 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/27 14:47:17 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
-# define BUFFER_SIZE 42
 
 # include <unistd.h>
 # include <stdio.h>
