@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/28 15:43:09 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:49:28 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strjoin(char const *s1, char const *s2);
 
-char *ft_strjoin_and_free(char *s1, char *s2);
+char	*ft_strjoin_and_free(char *s1, char *s2);
 
 // 1. get_next_line call
 // rest leer
@@ -36,17 +36,18 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	len_s2 = ft_strlen(s2);
 	ptr = malloc(len_s1 + len_s2 + 1);
 	if (!ptr)
-	return (NULL);
+		return (NULL);
 	ft_strlcpy(ptr, s1, len_s1 + 1);
 	ft_strlcpy(ptr + len_s1, s2, len_s2 + 1);
 	return (ptr);
 }
 
-char *ft_strjoin_and_free(char *s1, char *s2)
+char	*ft_strjoin_and_free(char *s1, char *s2)
 {
-	char *res = ft_strjoin(s1, s2);
+	char	*ret;
+	ret = ft_strjoin(s1, s2);
 	free(s1);
-	return (res);
+	return (ret);
 }
 
 char	*get_next_line(int fd)
@@ -54,17 +55,18 @@ char	*get_next_line(int fd)
 	static char	*rest;
 	char		buffer[BUFFER_SIZE + 1];
 	char		*line;
+	char		*tmp;
 	int			found_nl;
 	int			read_bytes;
 
-	while ((read_bytes = read(fd, buffer, BUFFER_SIZE)) > 0)
+	read_bytes = read(fd, buffer, BUFFER_SIZE);
+	while (read_bytes > 0)
 	{
 		buffer[read_bytes] = '\0';
 		if (!rest)
 			rest = ft_strdup(buffer);
 		else
 			rest = ft_strjoin_and_free(rest, buffer);
-
 		found_nl = ft_strchr_index(rest, '\n');
 		if (found_nl != -1)
 		{
@@ -72,14 +74,13 @@ char	*get_next_line(int fd)
 			if (!line)
 				return (NULL);
 			ft_strlcpy(line, rest, found_nl + 2);
-			char *tmp = ft_strdup(rest + found_nl + 1);
+			tmp = ft_strdup(rest + found_nl + 1);
 			free(rest);
 			rest = tmp;
 			return (line);
 		}
+		read_bytes = read(fd, buffer, BUFFER_SIZE);
 	}
-
-	// letzte Zeile zurückgeben, wenn kein \n mehr kommt
 	if (rest && *rest)
 	{
 		line = ft_strdup(rest);
