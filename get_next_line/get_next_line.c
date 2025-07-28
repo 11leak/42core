@@ -6,13 +6,15 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/27 14:51:18 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:43:09 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 char	*ft_strjoin(char const *s1, char const *s2);
+
+char *ft_strjoin_and_free(char *s1, char *s2);
 
 // 1. get_next_line call
 // rest leer
@@ -26,45 +28,64 @@ char	*ft_strjoin(char const *s1, char const *s2);
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	len_ptr;
 	size_t	len_s1;
 	size_t	len_s2;
 	char	*ptr;
 
-	len_ptr = ft_strlen(s1) + ft_strlen(s2);
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
-	ptr = (char *)malloc((len_ptr + 1) * sizeof(char));
+	ptr = malloc(len_s1 + len_s2 + 1);
 	if (!ptr)
-		return (NULL);
+	return (NULL);
 	ft_strlcpy(ptr, s1, len_s1 + 1);
-	ft_strlcat(ptr + len_s1, s2, len_s2 + 1);
-	ptr[len_ptr + 1] = '\0';
+	ft_strlcpy(ptr + len_s1, s2, len_s2 + 1);
 	return (ptr);
+}
+
+char *ft_strjoin_and_free(char *s1, char *s2)
+{
+	char *res = ft_strjoin(s1, s2);
+	free(s1);
+	return (res);
 }
 
 char	*get_next_line(int fd)
 {
-	char		buffer[BUFFER_SIZE + 1];
 	static char	*rest;
+	char		buffer[BUFFER_SIZE + 1];
 	char		*line;
 	int			found_nl;
 	int			read_bytes;
 
-	line = NULL;
-	read_bytes = read(fd, buffer, BUFFER_SIZE);
-	while (read_bytes > 0)
+	while ((read_bytes = read(fd, buffer, BUFFER_SIZE)) > 0)
 	{
 		buffer[read_bytes] = '\0';
 		if (!rest)
 			rest = ft_strdup(buffer);
-		ft_strlcat(rest, buffer, ft_strlen(buffer));
-		if ((found_nl = ft_strchr(rest, 10)) != -1)
+		else
+			rest = ft_strjoin_and_free(rest, buffer);
+
+		found_nl = ft_strchr_index(rest, '\n');
+		if (found_nl != -1)
 		{
-			ft_strlcpy(line, rest, found_nl);
+			line = malloc(found_nl + 2);
+			if (!line)
+				return (NULL);
+			ft_strlcpy(line, rest, found_nl + 2);
+			char *tmp = ft_strdup(rest + found_nl + 1);
+			free(rest);
+			rest = tmp;
 			return (line);
 		}
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
+	}
+
+	// letzte Zeile zurückgeben, wenn kein \n mehr kommt
+	if (rest && *rest)
+	{
+		line = ft_strdup(rest);
+		free(rest);
+		rest = NULL;
+		return (line);
 	}
 	return (NULL);
 }

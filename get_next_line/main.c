@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 20:58:27 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/27 14:26:41 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:28:05 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	main(int argc, char **argv)
 		return (1);
 	fd = open(argv[1], O_RDONLY);
 	printf("%s", get_next_line(fd));
+	close(fd);
 	return (0);
 }

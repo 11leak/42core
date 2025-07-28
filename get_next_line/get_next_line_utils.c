@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:33:35 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/27 14:27:18 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/28 15:38:58 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ size_t	ft_strlen(const char *str)
 	return (i++);
 }
 
-int	ft_strchr(const char *s, int c)
+int	ft_strchr_index(const char *s, int c)
 {
 	int	i;
 
