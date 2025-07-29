@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/29 15:01:13 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:01:51 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ char	*get_next_line(int fd)
 			ft_strlcat(rest, buffer, ft_strlen(buffer));
 		if (ft_strchr_index(rest, 10))
 		{
-			line = malloc(nl_index + 1);
 			nl_index = ft_strchr_index(rest, 10);
+			line = malloc(nl_index + 1);
 			ft_strlcpy(line, rest, nl_index);
 			break ;
 		}
