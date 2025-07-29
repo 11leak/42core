@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/29 14:50:12 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:54:40 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*ft_strjoin_and_free(char *s1, char *s2)
 char	*get_next_line(int fd)
 {
 	static char	*rest;
-	char		*buffer[BUFFER_SIZE + 1];
+	char		buffer[BUFFER_SIZE + 1];
 	char		*line;
 	int			read_bytes;
 	int			nl_index;
