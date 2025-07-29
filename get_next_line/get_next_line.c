@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/29 14:56:02 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/29 15:01:13 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*get_next_line(int fd)
 	int			nl_index;
 
 	read_bytes = read(fd, buffer, BUFFER_SIZE);
-	while (read_bytes > 1)
+	while (read_bytes > 0)
 	{
 		if (!rest)
 			ft_strjoin_and_free(rest, buffer);
