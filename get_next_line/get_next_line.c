@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/29 15:14:38 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/29 16:48:53 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,11 @@ char	*get_next_line(int fd)
 			if (!line)
 				return (NULL);
 			ft_strlcpy(line, rest, nl_index);
+			// rest = ft_strdup(rest + nl_index);
+			ft_strlcpy(rest, rest + nl_index, ft_strlen(rest) - nl_index);
 			break ;
 		}
+		read_bytes = read(fd, buffer, BUFFER_SIZE);
 	}
 	return (line);
 }
