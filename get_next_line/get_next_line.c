@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/29 13:52:20 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/29 14:50:12 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,41 +53,66 @@ char	*ft_strjoin_and_free(char *s1, char *s2)
 char	*get_next_line(int fd)
 {
 	static char	*rest;
-	char		buffer[BUFFER_SIZE + 1];
+	char		*buffer[BUFFER_SIZE + 1];
 	char		*line;
-	char		*tmp;
-	int			found_nl;
 	int			read_bytes;
+	int			nl_index;
 
-	read_bytes = 1;
-	while (read_bytes > 0)
+	read_bytes = read(fd, buffer, BUFFER_SIZE);
+	while (read_bytes > 1)
 	{
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		buffer[read_bytes] = '\0';
 		if (!rest)
-			rest = ft_strdup(buffer);
-		else
-			rest = ft_strjoin_and_free(rest, buffer);
-		found_nl = ft_strchr_index(rest, '\n');
-		if (found_nl != -1)
+			ft_strjoin_and_free(rest, buffer);
+		else if (rest)
+			ft_strlcat(rest, buffer, ft_strlen(buffer));
+		if (ft_strchr_index(rest, 10))
 		{
-			line = malloc(found_nl + 2);
-			if (!line)
-				return (NULL);
-			ft_strlcpy(line, rest, found_nl + 2);
-			tmp = ft_strdup(rest + found_nl + 1);
-			free(rest);
-			rest = tmp;
-			return (line);
+			nl_index = ft_strchr_index(rest, 10);
+			ft_strlcpy(line, rest, nl_index);
+			break ;
 		}
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
 	}
-	if (rest && *rest)
-	{
-		line = ft_strdup(rest);
-		free(rest);
-		rest = NULL;
-		return (line);
-	}
-	return (NULL);
+	return (line);
 }
+
+// char	*get_next_line(int fd)
+// {
+// 	static char	*rest;
+// 	char		buffer[BUFFER_SIZE + 1];
+// 	char		*line;
+// 	char		*tmp;
+// 	int			found_nl;
+// 	int			read_bytes;
+
+// 	read_bytes = 1;
+// 	while (read_bytes > 0)
+// 	{
+// 		read_bytes = read(fd, buffer, BUFFER_SIZE);
+// 		buffer[read_bytes] = '\0';
+// 		if (!rest)
+// 			rest = ft_strdup(buffer);
+// 		else
+// 			rest = ft_strjoin_and_free(rest, buffer);
+// 		found_nl = ft_strchr_index(rest, '\n');
+// 		if (found_nl != -1)
+// 		{
+// 			line = malloc(found_nl + 2);
+// 			if (!line)
+// 				return (NULL);
+// 			ft_strlcpy(line, rest, found_nl + 2);
+// 			tmp = ft_strdup(rest + found_nl + 1);
+// 			free(rest);
+// 			rest = tmp;
+// 			return (line);
+// 		}
+// 		read_bytes = read(fd, buffer, BUFFER_SIZE);
+// 	}
+// 	if (rest && *rest)
+// 	{
+// 		line = ft_strdup(rest);
+// 		free(rest);
+// 		rest = NULL;
+// 		return (line);
+// 	}
+// 	return (NULL);
+// }
