@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/29 16:48:53 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/29 17:40:32 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,17 @@ char	*get_next_line(int fd)
 			rest = ft_strdup(buffer);
 		else if (rest)
 			rest = ft_strjoin_and_free(rest, buffer);
-		if (ft_strchr_index(rest, 10))
+		nl_index = ft_strchr_index(rest, 10);
+		if (nl_index != 0)
 		{
-			nl_index = ft_strchr_index(rest, 10);
 			line = malloc(nl_index + 2);
 			if (!line)
 				return (NULL);
-			ft_strlcpy(line, rest, nl_index);
+			ft_strlcpy(line, rest, nl_index + 2);
 			// rest = ft_strdup(rest + nl_index);
-			ft_strlcpy(rest, rest + nl_index, ft_strlen(rest) - nl_index);
+			char *tmp = ft_strdup(rest + nl_index + 1);
+			free(rest);
+			rest = tmp;
 			break ;
 		}
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
