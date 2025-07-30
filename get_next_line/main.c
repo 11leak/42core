@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 20:58:27 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/29 16:57:15 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/30 16:12:26 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,12 @@
 
 // cc -Wall -Wextra -Werror -D BUFFER_SIZE=42 get_next_line.c get_next_line_utils.c main.c
 
-int	main(int argc, char **argv)
+int	main()
 {
 	int		fd;
 	char	*line;
 
-	if (argc != 2)
-		return (1);
-	fd = open(argv[1], O_RDONLY);
+	fd = open("test.txt", O_RDONLY);
 	if (fd < 0)
 		return (1);
 
