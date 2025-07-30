@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/30 13:03:37 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/30 13:07:47 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,12 @@ char	*get_next_line(int fd)
 	int			read_bytes;
 
 	line = NULL;
-	read_bytes = read(fd, buffer, BUFFER_SIZE);
+	read_bytes = 1;
 	while (read_bytes > 0)
 	{
+		read_bytes = read(fd, buffer, BUFFER_SIZE);
+		if (read_bytes <= 0)
+			break ;
 		buffer[read_bytes] = '\0';
 		if (!rest)
 			rest = ft_strdup(buffer);
@@ -89,7 +92,6 @@ char	*get_next_line(int fd)
 			rest = ft_strjoin_and_free(rest, buffer);
 		if (ft_nl_check(&rest, &line) == 1)
 			return (line);
-		// read_bytes = read(fd, buffer, BUFFER_SIZE);
 	}
 	if (rest && *rest)
 	{
@@ -100,5 +102,7 @@ char	*get_next_line(int fd)
 		rest = NULL;
 		return (line);
 	}
+	free(rest);
+	rest = NULL;
 	return (NULL);
 }
