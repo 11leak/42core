@@ -6,15 +6,11 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/30 13:07:47 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/30 13:45:22 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
-char	*ft_strjoin(char const *s1, char const *s2);
-
-char	*ft_strjoin_and_free(char *s1, char *s2);
 
 // 1. get_next_line call
 // rest leer
