@@ -1,23 +1,57 @@
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	i = 0;
+	size_t	i;
+	size_t	len_dst;
+	size_t	len_src;
 
-	while (s && s[i])
+	i = 0;
+	len_dst = ft_strlen(dst);
+	len_src = ft_strlen(src);
+	if (size <= len_dst)
+		return (len_src + size);
+	while (((len_dst + i) < (size - 1)) && src[i] != '\0')
+	{
+		dst[len_dst + i] = src[i];
+		i++;
+	}
+	dst[len_dst + i] = '\0';
+	return (len_dst + len_src);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i] != '\0')
 		i++;
 	return (i);
 }
 
+int	ft_strchr_index(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (i <= (int)ft_strlen(s))
+	{
+		if (s[i] == (char)c)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	i = 0;
+	size_t	i;
 
-	if (!src || !dst)
-		return (0);
-	if (size > 0)
+	i = 0;
+	if (size != 0)
 	{
-		while (src[i] && i < size - 1)
+		while (src[i] != '\0' && i < (size - 1))
 		{
 			dst[i] = src[i];
 			i++;
@@ -27,30 +61,15 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	return (ft_strlen(src));
 }
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	i = 0;
-	size_t	dlen = ft_strlen(dst);
-	size_t	slen = ft_strlen(src);
-
-	if (size <= dlen)
-		return (slen + size);
-	while (src[i] && dlen + i < size - 1)
-	{
-		dst[dlen + i] = src[i];
-		i++;
-	}
-	dst[dlen + i] = '\0';
-	return (dlen + slen);
-}
-
 char	*ft_strdup(const char *s)
 {
-	size_t	len = ft_strlen(s);
-	char	*dup = malloc(len + 1);
+	char	*ptr;
+	size_t	len_s;
 
-	if (!dup)
+	len_s = ft_strlen(s);
+	ptr = (char *)malloc(sizeof(char) * len_s + 1);
+	if (!ptr)
 		return (NULL);
-	ft_strlcpy(dup, s, len + 1);
-	return (dup);
+	ft_strlcpy(ptr, s, len_s + 1);
+	return (ptr);
 }
