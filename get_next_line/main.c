@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/25 20:58:27 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/30 16:12:26 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/30 17:04:30 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,15 @@ int	main()
 	int		fd;
 	char	*line;
 
-	fd = open("test.txt", O_RDONLY);
+	fd = open("text.txt", O_RDONLY);
 	if (fd < 0)
 		return (1);
 
-	line = get_next_line(fd);
-	while (line != NULL)
+
+	while ((line = get_next_line(fd)) != NULL)
 	{
 		printf("%s", line);  // kein \n hinzufügen, steht evtl. schon in der Zeile
 		free(line);
-		line = get_next_line(fd);
 	}
 	close(fd);
 	return (0);

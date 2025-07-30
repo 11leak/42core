@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/17 13:33:35 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/30 16:40:59 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/30 17:24:28 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_strchr_index(const char *s, int c)
 	int	i;
 
 	i = 0;
-	while (i <= (int)ft_strlen(s))
+	while (s[i] != '\0')
 	{
 		if (s[i] == (char)c)
 			return (i);
