@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/29 17:40:32 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/30 12:12:25 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,30 @@ char	*ft_strjoin(char const *s1, char const *s2)
 char	*ft_strjoin_and_free(char *s1, char *s2)
 {
 	char	*ret;
+
 	ret = ft_strjoin(s1, s2);
 	free(s1);
 	return (ret);
+}
+
+int	ft_nl_check(char **rest, char **line)
+{
+	int		nl_index;
+	char	*tmp;
+
+	nl_index = ft_strchr_index(*rest, 10);
+	if (nl_index != -1)
+	{
+		*line = malloc(nl_index + 2);
+		if (!*line)
+			return (0);
+		ft_strlcpy(*line, *rest, nl_index + 2);
+		tmp = ft_strdup(*rest + nl_index + 1);
+		free(*rest);
+		*rest = tmp;
+		return (1);
+	}
+	return (0);
 }
 
 char	*get_next_line(int fd)
@@ -56,7 +77,6 @@ char	*get_next_line(int fd)
 	char		buffer[BUFFER_SIZE + 1];
 	char		*line;
 	int			read_bytes;
-	int			nl_index;
 
 	line = NULL;
 	read_bytes = read(fd, buffer, BUFFER_SIZE);
@@ -67,20 +87,16 @@ char	*get_next_line(int fd)
 			rest = ft_strdup(buffer);
 		else if (rest)
 			rest = ft_strjoin_and_free(rest, buffer);
-		nl_index = ft_strchr_index(rest, 10);
-		if (nl_index != 0)
-		{
-			line = malloc(nl_index + 2);
-			if (!line)
-				return (NULL);
-			ft_strlcpy(line, rest, nl_index + 2);
-			// rest = ft_strdup(rest + nl_index);
-			char *tmp = ft_strdup(rest + nl_index + 1);
-			free(rest);
-			rest = tmp;
-			break ;
-		}
+		if (ft_nl_check(&rest, &line) == 1)
+			return (line);
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
 	}
-	return (line);
+	if (rest && *rest)
+	{
+		line = ft_strdup(rest);
+		free(rest);
+		rest = NULL;
+		return (line);
+	}
+	return (NULL);
 }
