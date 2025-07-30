@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/30 15:26:36 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:53:54 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,18 @@
 // wenn nein: wieder buffer liest und addiert zu rest dazu
 // bis ende
 
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	size_t	len_s1;
-	size_t	len_s2;
-	char	*ptr;
-
-	len_s1 = ft_strlen(s1);
-	len_s2 = ft_strlen(s2);
-	ptr = malloc(len_s1 + len_s2 + 1);
-	if (!ptr)
-		return (NULL);
-	ft_strlcpy(ptr, s1, len_s1 + 1);
-	ft_strlcpy(ptr + len_s1, s2, len_s2 + 1);
-	return (ptr);
-}
-
 char	*ft_strjoin_and_free(char *s1, char *s2)
 {
-	char	*ret;
+	char	*res;
+	size_t	len = ft_strlen(s1) + ft_strlen(s2);
 
-	ret = ft_strjoin(s1, s2);
+	res = malloc(len + 1);
+	if (!res)
+		return (NULL);
+	ft_strlcpy(res, s1, len + 1);
+	ft_strlcat(res, s2, len + 1);
 	free(s1);
-	return (ret);
+	return (res);
 }
 
 int	ft_nl_check(char **rest, char **line)
