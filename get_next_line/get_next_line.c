@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/30 13:45:22 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/30 15:09:19 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,15 @@ int	ft_nl_check(char **rest, char **line)
 char	*get_next_line(int fd)
 {
 	static char	*rest;
-	char		buffer[BUFFER_SIZE + 1];
+	char		*buffer;
 	char		*line;
 	int			read_bytes;
 
 	line = NULL;
 	read_bytes = 1;
+	buffer = malloc(BUFFER_SIZE + 1);
+	if (!buffer)
+		return (NULL);
 	while (read_bytes > 0)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
@@ -87,8 +90,12 @@ char	*get_next_line(int fd)
 		else
 			rest = ft_strjoin_and_free(rest, buffer);
 		if (ft_nl_check(&rest, &line) == 1)
+		{
+			free(buffer);
 			return (line);
+		}
 	}
+	free(buffer);
 	if (rest && *rest)
 	{
 		if (ft_nl_check(&rest, &line))
