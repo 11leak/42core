@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/30 12:18:26 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/07/30 13:03:37 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,11 @@ char	*get_next_line(int fd)
 		buffer[read_bytes] = '\0';
 		if (!rest)
 			rest = ft_strdup(buffer);
-		else if (rest)
+		else
 			rest = ft_strjoin_and_free(rest, buffer);
 		if (ft_nl_check(&rest, &line) == 1)
 			return (line);
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
+		// read_bytes = read(fd, buffer, BUFFER_SIZE);
 	}
 	if (rest && *rest)
 	{
