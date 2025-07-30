@@ -52,7 +52,7 @@ char	*get_next_line(int fd)
 	{
 		read_bytes = read(fd, buffer, BUFFER_SIZE);
 		if (read_bytes < 0)
-			break;
+			return (free(buffer), NULL); // <== handle read error
 		buffer[read_bytes] = '\0';
 		if (!rest)
 			rest = ft_strdup(buffer);
@@ -64,7 +64,7 @@ char	*get_next_line(int fd)
 	free(buffer);
 	if (rest && *rest)
 	{
-		if (ft_nl_check(&rest, &line))
+		if (ft_nl_check(&rest, &line)) // <== important
 			return (line);
 		line = ft_strdup(rest);
 		free(rest);
