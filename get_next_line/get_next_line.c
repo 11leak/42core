@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/08/01 17:07:25 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/08/01 17:28:04 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,63 +67,71 @@ int	ft_nl_check(char **rest, char **line)
 	return (0);
 }
 
+char	*gnl_return_rest(char **rest)
+{
+	char	*line;
+
+	if (*rest && **rest)
+	{
+		if (ft_nl_check(rest, &line))
+			return (line);
+		line = ft_strdup(*rest);
+		free(*rest);
+		*rest = NULL;
+		return (line);
+	}
+	if (*rest)
+	{
+		free(*rest);
+		*rest = NULL;
+	}
+	return (NULL);
+}
+
+char	*gnl_read(int fd, char *buffer, char **rest)
+{
+	char	*line;
+	char	*tmp;
+	int		r;
+
+	line = NULL;
+	r = 1;
+	while (r > 0)
+	{
+		r = read(fd, buffer, BUFFER_SIZE);
+		if (r < 0)
+			return (free(*rest), *rest = NULL, NULL);
+		buffer[r] = '\0';
+		if (!*rest)
+			*rest = ft_strdup(buffer);
+		else
+		{
+			tmp = ft_strjoin_and_free(*rest, buffer);
+			if (!tmp)
+				return (free(*rest), *rest = NULL, NULL);
+			*rest = tmp;
+		}
+		if (ft_nl_check(rest, &line))
+			return (line);
+	}
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*rest;
 	char		*buffer;
 	char		*line;
-	char		*new_rest;
-	int			read_bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = NULL;
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	while (1)
-	{
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes < 0)
-		{
-			free(buffer);
-			if (rest)
-			{
-				free(rest);
-				rest = NULL;
-			}
-			return (NULL);
-		}
-		if (read_bytes == 0)
-			break ;
-		buffer[read_bytes] = '\0';
-		if (!rest)
-		{
-			rest = ft_strdup(buffer);
-			if (!rest)
-				return (free(buffer), NULL);
-		}
-		else
-		{
-			new_rest = ft_strjoin_and_free(rest, buffer);
-			if (!new_rest)
-				return (free(buffer), free(rest), rest = NULL, NULL);
-			rest = new_rest;
-		}
-		if (ft_nl_check(&rest, &line) == 1)
-			return (free(buffer), line);
-	}
+	line = gnl_read(fd, buffer, &rest);
 	free(buffer);
-	if (rest && *rest)
-	{
-		if (ft_nl_check(&rest, &line))
-			return (line);
-		return (line = ft_strdup(rest), free(rest), rest = NULL, line);
-	}
-	if (rest)
-	{
-		free(rest);
-		rest = NULL;
-	}
-	return (NULL);
+	if (line)
+		return (line);
+	line = gnl_return_rest(&rest);
+	return (line);
 }
