@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/08/01 16:17:05 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/08/01 17:07:25 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ char	*ft_strjoin_and_free(char *s1, char *s2)
 	char	*res;
 	size_t	len;
 
-	len = (ft_strlen(s1) + ft_strlen(s2));
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
 	res = malloc(len + 1);
 	if (!res)
 		return (NULL);
@@ -42,6 +44,8 @@ int	ft_nl_check(char **rest, char **line)
 	int		nl_index;
 	char	*tmp;
 
+	if (!rest || !*rest || !line)
+		return (0);
 	nl_index = ft_strchr_index(*rest, 10);
 	if (nl_index != -1)
 	{
@@ -50,6 +54,12 @@ int	ft_nl_check(char **rest, char **line)
 			return (0);
 		ft_strlcpy(*line, *rest, nl_index + 2);
 		tmp = ft_strdup(*rest + nl_index + 1);
+		if (!tmp)
+		{
+			free(*line);
+			*line = NULL;
+			return (0);
+		}
 		free(*rest);
 		*rest = tmp;
 		return (1);
@@ -57,56 +67,63 @@ int	ft_nl_check(char **rest, char **line)
 	return (0);
 }
 
-char	*read_and_process(int fd, char **rest, char **buffer)
-{
-	char	*line;
-	int		read_bytes;
-
-	line = NULL;
-	read_bytes = 1;
-	while (read_bytes > 0)
-	{
-		read_bytes = read(fd, *buffer, BUFFER_SIZE);
-		if (read_bytes <= 0)
-			break ;
-		(*buffer)[read_bytes] = '\0';
-		if (!*rest)
-			*rest = ft_strdup(*buffer);
-		else
-			*rest = ft_strjoin_and_free(*rest, *buffer);
-		if (ft_nl_check(rest, &line) == 1)
-		{
-			free(*buffer);
-			return (line);
-		}
-	}
-	return (NULL);
-}
-
 char	*get_next_line(int fd)
 {
 	static char	*rest;
 	char		*buffer;
 	char		*line;
+	char		*new_rest;
+	int			read_bytes;
 
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (NULL);
 	line = NULL;
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	line = read_and_process(fd, &rest, &buffer);
-	if (line)
-		return (line);
+	while (1)
+	{
+		read_bytes = read(fd, buffer, BUFFER_SIZE);
+		if (read_bytes < 0)
+		{
+			free(buffer);
+			if (rest)
+			{
+				free(rest);
+				rest = NULL;
+			}
+			return (NULL);
+		}
+		if (read_bytes == 0)
+			break ;
+		buffer[read_bytes] = '\0';
+		if (!rest)
+		{
+			rest = ft_strdup(buffer);
+			if (!rest)
+				return (free(buffer), NULL);
+		}
+		else
+		{
+			new_rest = ft_strjoin_and_free(rest, buffer);
+			if (!new_rest)
+				return (free(buffer), free(rest), rest = NULL, NULL);
+			rest = new_rest;
+		}
+		if (ft_nl_check(&rest, &line) == 1)
+			return (free(buffer), line);
+	}
 	free(buffer);
 	if (rest && *rest)
 	{
 		if (ft_nl_check(&rest, &line))
 			return (line);
-		line = ft_strdup(rest);
+		return (line = ft_strdup(rest), free(rest), rest = NULL, line);
+	}
+	if (rest)
+	{
 		free(rest);
 		rest = NULL;
-		return (line);
 	}
-	free(rest);
-	rest = NULL;
 	return (NULL);
 }
