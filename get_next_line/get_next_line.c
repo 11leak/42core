@@ -6,7 +6,7 @@
 /*   By: dwotsche <dwotsche@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/12 13:01:06 by dwotsche          #+#    #+#             */
-/*   Updated: 2025/07/30 17:32:18 by dwotsche         ###   ########.fr       */
+/*   Updated: 2025/08/01 15:09:32 by dwotsche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@
 char	*ft_strjoin_and_free(char *s1, char *s2)
 {
 	char	*res;
-	size_t	len = ft_strlen(s1) + ft_strlen(s2);
+	size_t	len;
 
+	len = (ft_strlen(s1) + ft_strlen(s2));
 	res = malloc(len + 1);
 	if (!res)
 		return (NULL);
@@ -56,34 +57,45 @@ int	ft_nl_check(char **rest, char **line)
 	return (0);
 }
 
+char	*read_and_process(int fd, char **rest, char **buffer)
+{
+	char	*line;
+	int		read_bytes;
+
+	line = NULL;
+	read_bytes = 1;
+	while (read_bytes > 0)
+	{
+		read_bytes = read(fd, *buffer, BUFFER_SIZE);
+		if (read_bytes <= 0)
+			break ;
+		(*buffer)[read_bytes] = '\0';
+		if (!*rest)
+			*rest = ft_strdup(*buffer);
+		else
+			*rest = ft_strjoin_and_free(*rest, *buffer);
+		if (ft_nl_check(rest, &line) == 1)
+		{
+			free(*buffer);
+			return (line);
+		}
+	}
+	return (NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	static char	*rest;
 	char		*buffer;
 	char		*line;
-	int			read_bytes;
 
 	line = NULL;
-	read_bytes = 1;
 	buffer = malloc(BUFFER_SIZE + 1);
 	if (!buffer)
 		return (NULL);
-	while (read_bytes > 0)
-	{
-		read_bytes = read(fd, buffer, BUFFER_SIZE);
-		if (read_bytes <= 0)
-			break ;
-		buffer[read_bytes] = '\0';
-		if (!rest)
-			rest = ft_strdup(buffer);
-		else
-			rest = ft_strjoin_and_free(rest, buffer);
-		if (ft_nl_check(&rest, &line) == 1)
-		{
-			free(buffer);
-			return (line);
-		}
-	}
+	line = read_and_process(fd, &rest, &buffer);
+	if (line)
+		return (line);
 	free(buffer);
 	if (rest && *rest)
 	{
